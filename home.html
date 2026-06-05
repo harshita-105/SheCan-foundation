@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>She Can Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #C2607A;
+    --rose-light: #F5E6EB;
+    --rose-dark: #8B3A50;
+    --clay: #D98C6A;
+    --cream: #FBF7F2;
+    --charcoal: #2A2220;
+    --muted: #7A6E6A;
+    --gold: #C9A96E;
+    --green: #6B9E7A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ─────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(251,247,242,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(194,96,122,0.12);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(42,34,32,0.07); }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--rose-dark);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--rose); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rose); }
+
+  .nav-cta {
+    background: var(--rose);
+    color: #fff !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 100px;
+    font-weight: 500 !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+  .nav-cta:hover { background: var(--rose-dark) !important; transform: translateY(-1px); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+  .hamburger span { width: 24px; height: 1.5px; background: var(--charcoal); transition: all 0.3s; display: block; }
+
+  /* ── HERO ─────────────────────────────────── */
+  #home {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-bg-circle:nth-child(1) {
+    width: 600px; height: 600px;
+    right: -120px; top: -120px;
+    background: radial-gradient(circle, rgba(194,96,122,0.08) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  .hero-bg-circle:nth-child(2) {
+    width: 400px; height: 400px;
+    left: -60px; bottom: 40px;
+    background: radial-gradient(circle, rgba(201,169,110,0.07) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite 2s;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.06); opacity: 0.7; }
+  }
+
+  .hero-text { position: relative; z-index: 1; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--rose);
+    background: var(--rose-light); padding: 0.4rem 1rem;
+    border-radius: 100px; margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag::before { content: '♀'; font-size: 0.9rem; }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--rose);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s ease 0.3s both; }
+
+  .btn-primary {
+    background: var(--rose);
+    color: #fff;
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
+    font-size: 0.925rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: var(--rose-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(194,96,122,0.35); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--charcoal);
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
+    font-size: 0.925rem;
+    font-weight: 400;
+    text-decoration: none;
+    border: 1px solid rgba(42,34,32,0.2);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--rose); color: var(--rose); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 2rem; margin-top: 3rem;
+    animation: fadeUp 0.6s ease 0.4s both;
+  }
+  .stat { border-left: 2px solid var(--rose-light); padding-left: 1rem; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 600; color: var(--rose-dark);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 0.2rem; }
+
+  .hero-image-wrap {
+    position: relative; z-index: 1;
+    animation: fadeLeft 0.8s ease 0.2s both;
+  }
+
+  .hero-img-frame {
+    position: relative;
+    border-radius: 2px 60px 2px 60px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    max-height: 600px;
+  }
+  .hero-img-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: saturate(0.9);
+  }
+  .hero-img-frame:hover img { transform: scale(1.03); }
+
+  .hero-img-badge {
+    position: absolute; bottom: 2rem; left: -1.5rem;
+    background: #fff;
+    padding: 1rem 1.4rem;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(42,34,32,0.12);
+    display: flex; align-items: center; gap: 0.75rem;
+    animation: fadeUp 0.6s ease 0.6s both;
+  }
+  .badge-icon { font-size: 1.6rem; }
+  .badge-text { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+  .badge-text strong { display: block; color: var(--charcoal); font-size: 0.95rem; }
+
+  .hero-img-dot {
+    position: absolute; top: 1.5rem; right: -0.75rem;
+    width: 80px; height: 80px;
+    background: var(--rose-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.65rem; font-weight: 600;
+    color: var(--rose-dark); letter-spacing: 0.05em;
+    text-align: center; line-height: 1.3;
+    animation: spin-slow 12s linear infinite;
+  }
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+
+  /* ── MARQUEE ─────────────────────────────── */
+  .marquee-strip {
+    background: var(--rose);
+    overflow: hidden;
+    padding: 1rem 0;
+  }
+  .marquee-inner {
+    display: flex; gap: 3rem;
+    animation: marquee 22s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic;
+    color: rgba(255,255,255,0.85);
+    flex-shrink: 0;
+  }
+  .marquee-dot { color: rgba(255,255,255,0.4); }
+
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* ── ABOUT ─────────────────────────────── */
+  #about {
+    padding: 7rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .section-label {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--rose); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-label::before { content: ''; width: 30px; height: 1px; background: var(--rose); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--rose); }
+
+  .about-desc {
+    font-size: 1rem; font-weight: 300; color: var(--muted);
+    line-height: 1.9; margin-bottom: 1.5rem;
+  }
+
+  .about-values {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; margin-top: 2rem;
+  }
+  .value-card {
+    padding: 1.2rem 1.4rem;
+    background: #fff;
+    border: 1px solid rgba(194,96,122,0.1);
+    border-radius: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .value-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(194,96,122,0.1); }
+  .value-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .value-title { font-size: 0.875rem; font-weight: 500; color: var(--charcoal); margin-bottom: 0.3rem; }
+  .value-text { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+  .about-visual {
+    position: relative;
+  }
+  .about-img-main {
+    width: 100%;
+    border-radius: 60px 2px 60px 2px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+  }
+  .about-img-main img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(0.85);
+    transition: transform 0.6s;
+  }
+  .about-img-main:hover img { transform: scale(1.03); }
+
+  .about-card-float {
+    position: absolute; top: 2rem; right: -1.5rem;
+    background: var(--rose);
+    color: #fff;
+    padding: 1.2rem 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 16px 48px rgba(194,96,122,0.3);
+  }
+  .about-card-float .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 600; line-height: 1;
+  }
+  .about-card-float .lbl { font-size: 0.7rem; opacity: 0.85; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .about-card-float2 {
+    position: absolute; bottom: 2rem; left: -1.5rem;
+    background: #fff;
+    padding: 1rem 1.4rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(42,34,32,0.1);
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .face-stack { display: flex; }
+  .face {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--rose-light);
+    border: 2px solid #fff;
+    margin-left: -8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 500; color: var(--rose-dark);
+  }
+  .face:first-child { margin-left: 0; }
+  .face-text { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+  .face-text strong { display: block; color: var(--charcoal); font-size: 0.9rem; }
+
+  /* ── PROGRAMS ─────────────────────────── */
+  #programs {
+    padding: 7rem 4rem;
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+  }
+  #programs::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(194,96,122,0.12) 0%, transparent 70%);
+  }
+
+  #programs .section-label { color: var(--rose-light); }
+  #programs .section-label::before { background: var(--rose-light); }
+  #programs .section-title { color: #fff; }
+
+  .programs-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;
+  }
+
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .program-card {
+    padding: 2rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    transition: background 0.3s, transform 0.2s, border-color 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .program-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--rose);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .program-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-4px); border-color: rgba(194,96,122,0.3); }
+  .program-card:hover::after { transform: scaleX(1); }
+
+  .program-icon { font-size: 2.5rem; margin-bottom: 1.2rem; }
+  .program-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: #fff; margin-bottom: 0.75rem; }
+  .program-desc { font-size: 0.875rem; font-weight: 300; color: rgba(255,255,255,0.55); line-height: 1.8; }
+
+  /* ── IMPACT ─────────────────────────── */
+  #impact {
+    padding: 7rem 4rem;
+    text-align: center;
+    background: var(--rose-light);
+  }
+
+  .impact-nums {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .impact-item {
+    padding: 2rem 1rem;
+  }
+
+  .impact-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 600;
+    color: var(--rose-dark);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .impact-label {
+    font-size: 0.875rem; color: var(--muted);
+    line-height: 1.5; max-width: 140px; margin: 0 auto;
+  }
+
+  /* ── VOLUNTEER / JOIN ─────────────────── */
+  #volunteer {
+    padding: 7rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 5rem;
+  }
+
+  .volunteer-form-wrap {
+    background: #fff;
+    border-radius: 28px;
+    padding: 3rem;
+    box-shadow: 0 24px 64px rgba(42,34,32,0.08);
+    border: 1px solid rgba(194,96,122,0.08);
+  }
+
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 400;
+    color: var(--charcoal); margin-bottom: 1.75rem;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.5rem; }
+  .form-group input,
+  .form-group select {
+    width: 100%; padding: 0.85rem 1rem;
+    background: var(--cream);
+    border: 1px solid rgba(42,34,32,0.1);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(194,96,122,0.12);
+  }
+  .form-group input::placeholder { color: rgba(122,110,106,0.5); }
+
+  .form-submit {
+    width: 100%;
+    background: var(--rose);
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 500;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .form-submit:hover { background: var(--rose-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(194,96,122,0.35); }
+
+  .form-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 1rem; }
+
+  /* success message */
+  .form-success {
+    display: none;
+    text-align: center; padding: 2rem;
+  }
+  .form-success.show { display: block; }
+  .form-success-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--rose-dark); margin-bottom: 0.5rem; }
+  .form-success p { color: var(--muted); font-size: 0.9rem; }
+
+  /* ── TESTIMONIALS ─────────────────────── */
+  #stories {
+    padding: 7rem 4rem;
+    background: var(--charcoal);
+    overflow: hidden;
+  }
+  #stories .section-label { color: rgba(255,255,255,0.5); }
+  #stories .section-label::before { background: rgba(255,255,255,0.3); }
+  #stories .section-title { color: #fff; }
+
+  .stories-header { margin-bottom: 3rem; }
+
+  .testimonials-slider { position: relative; }
+
+  .testimonials-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    transition: transform 0.5s ease;
+  }
+
+  .testimonial-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 24px;
+    padding: 2rem;
+  }
+
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; color: var(--rose);
+    line-height: 1; margin-bottom: 0.75rem;
+    opacity: 0.6;
+  }
+
+  .testimonial-text {
+    font-size: 0.925rem; font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.8; margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .author-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--rose);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; color: #fff; font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .author-name { font-size: 0.875rem; font-weight: 500; color: #fff; }
+  .author-role { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+
+  /* ── FOOTER ───────────────────────────── */
+  footer {
+    background: #1A1210;
+    padding: 4rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 600;
+    color: #fff; margin-bottom: 1rem;
+  }
+  .footer-brand-name span { color: var(--rose); }
+
+  .footer-desc { font-size: 0.875rem; font-weight: 300; line-height: 1.8; max-width: 280px; margin-bottom: 1.5rem; }
+
+  .footer-socials { display: flex; gap: 0.75rem; }
+  .social-btn {
+    width: 38px; height: 38px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5); font-size: 0.85rem;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .social-btn:hover { border-color: var(--rose); color: var(--rose); background: rgba(194,96,122,0.1); }
+
+  .footer-col-title {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.85); margin-bottom: 1.5rem;
+  }
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-links a { font-size: 0.875rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--rose); }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 2rem; font-size: 0.8rem; flex-wrap: wrap; gap: 1rem;
+  }
+
+  .footer-bottom-links { display: flex; gap: 1.5rem; }
+  .footer-bottom-links a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-bottom-links a:hover { color: rgba(255,255,255,0.7); }
+
+  .heart { color: var(--rose); }
+
+  /* ── ANIMATIONS ──────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(32px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ──────────────────────── */
+  @media (max-width: 1024px) {
+    nav { padding: 1.25rem 2rem; }
+    #home, #about, #volunteer { grid-template-columns: 1fr; padding: 6rem 2rem 3rem; gap: 3rem; }
+    #programs, #impact, #stories, footer { padding: 5rem 2rem; }
+    .programs-grid { grid-template-columns: 1fr 1fr; }
+    .impact-nums { grid-template-columns: 1fr 1fr; }
+    .testimonials-track { grid-template-columns: 1fr 1fr; }
+    .hero-image-wrap { max-width: 480px; margin: 0 auto; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: fixed; inset: 0; top: 64px;
+      background: var(--cream); z-index: 99;
+      justify-content: center; align-items: center;
+      gap: 2rem; padding: 2rem;
+    }
+    .nav-links.open a { font-size: 1.2rem; }
+    #home { padding: 6rem 1.5rem 3rem; }
+    .hero-stats { flex-wrap: wrap; }
+    .programs-grid { grid-template-columns: 1fr; }
+    .impact-nums { grid-template-columns: 1fr 1fr; }
+    .testimonials-track { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .about-values { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .about-card-float, .about-card-float2 { position: static; margin-top: 1rem; }
+    .hero-img-badge, .hero-img-dot { display: none; }
+    #about { padding: 5rem 1.5rem; }
+    #volunteer { padding: 5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="main-nav">
+  <a class="nav-logo" href="#home">She <span>Can</span> Foundation</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#volunteer" class="nav-cta">Join Us</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg-circle"></div>
+  <div class="hero-bg-circle"></div>
+
+  <div class="hero-text">
+    <div class="hero-tag">Empowering Girls Since 2018</div>
+    <h1 class="hero-title">
+      Every girl<br />deserves a chance to
+      <em>rise.</em>
+    </h1>
+    <p class="hero-desc">
+      She Can Foundation works with girls and young women across communities, providing education, mentorship, and resources so they can shape their own futures — on their own terms.
+    </p>
+    <div class="hero-actions">
+      <a href="#volunteer" class="btn-primary">Join Our Mission</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">2,400+</div>
+        <div class="stat-label">Girls Supported</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">18</div>
+        <div class="stat-label">Communities</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">94%</div>
+        <div class="stat-label">Stay in School</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image-wrap">
+    <div class="hero-img-frame">
+      <img
+        src="https://images.unsplash.com/photo-1617450365226-9bf28c04e130?w=800&auto=format&fit=crop&q=80"
+        alt="Young girls in a classroom learning together"
+      />
+    </div>
+    <div class="hero-img-badge">
+      <div class="badge-icon">🌸</div>
+      <div class="badge-text">
+        <strong>She can, she will</strong>
+        Changing lives every day
+      </div>
+    </div>
+    <div class="hero-img-dot">EST<br/>2018</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-inner">
+    <span class="marquee-item">Education for Every Girl</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Community Over Competition</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Breaking Barriers</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Mentorship That Matters</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">She Leads, She Succeeds</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Every Voice Heard</span>
+    <span class="marquee-dot">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Education for Every Girl</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Community Over Competition</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Breaking Barriers</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Mentorship That Matters</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">She Leads, She Succeeds</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Every Voice Heard</span>
+    <span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-img-main">
+      <img
+        src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&auto=format&fit=crop&q=80"
+        alt="Women and girls working together at a community workshop"
+      />
+    </div>
+    <div class="about-card-float">
+      <div class="num">6+</div>
+      <div class="lbl">Years of Impact</div>
+    </div>
+    <div class="about-card-float2">
+      <div class="face-stack">
+        <div class="face">P</div>
+        <div class="face">A</div>
+        <div class="face">S</div>
+      </div>
+      <div class="face-text">
+        <strong>85+ Volunteers</strong>
+        Dedicated team members
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="section-label">Who We Are</div>
+    <h2 class="section-title">Built by women,<br /><em>for every girl.</em></h2>
+    <p class="about-desc">
+      She Can Foundation was born from a simple belief: every girl, regardless of where she comes from, deserves access to opportunities that let her grow, lead, and thrive.
+    </p>
+    <p class="about-desc">
+      We work at the grassroots level — partnering with schools, families, and local leaders — to remove the barriers that hold girls back: from lack of access to education, to absence of safe spaces and mentorship.
+    </p>
+    <div class="about-values">
+      <div class="value-card">
+        <div class="value-icon">📚</div>
+        <div class="value-title">Education First</div>
+        <div class="value-text">We believe education is the most powerful tool for lasting change.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <div class="value-title">Community Roots</div>
+        <div class="value-text">Solutions come from within communities, not imposed from outside.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🌱</div>
+        <div class="value-title">Long-term Growth</div>
+        <div class="value-text">We invest in relationships and outcomes that last a lifetime.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">💬</div>
+        <div class="value-title">Amplify Voices</div>
+        <div class="value-text">Girls are leaders of our programs, not just recipients.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="programs-header">
+    <div>
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title" style="color:#fff;">Programs that<br /><em>transform lives.</em></h2>
+    </div>
+    <a href="#volunteer" class="btn-primary">Get Involved</a>
+  </div>
+
+  <div class="programs-grid">
+    <div class="program-card reveal">
+      <div class="program-icon">🎓</div>
+      <div class="program-title">Scholarship Support</div>
+      <div class="program-desc">Merit and need-based scholarships for girls to complete secondary and higher education, including textbooks, uniforms, and fees.</div>
+    </div>
+    <div class="program-card reveal">
+      <div class="program-icon">🌟</div>
+      <div class="program-title">Mentorship Circles</div>
+      <div class="program-desc">One-on-one and group mentorship pairing girls with professional women who guide, inspire, and advocate for them.</div>
+    </div>
+    <div class="program-card reveal">
+      <div class="program-icon">💻</div>
+      <div class="program-title">Digital Literacy</div>
+      <div class="program-desc">Tech skills workshops that bridge the digital divide, preparing girls for careers in a fast-changing, technology-driven world.</div>
+    </div>
+    <div class="program-card reveal">
+      <div class="program-icon">🏃‍♀️</div>
+      <div class="program-title">Health & Wellness</div>
+      <div class="program-desc">Safe spaces and programs focused on menstrual health, mental wellbeing, and physical fitness tailored for young women.</div>
+    </div>
+    <div class="program-card reveal">
+      <div class="program-icon">🎨</div>
+      <div class="program-title">Creative Expression</div>
+      <div class="program-desc">Art, writing, and storytelling workshops that build confidence and give girls a platform to share their experiences and ideas.</div>
+    </div>
+    <div class="program-card reveal">
+      <div class="program-icon">🌍</div>
+      <div class="program-title">Community Leadership</div>
+      <div class="program-desc">Leadership training programs that equip girls to become change-makers in their own neighborhoods and beyond.</div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="reveal">
+    <div class="section-label" style="justify-content:center;">Our Impact</div>
+    <h2 class="section-title">Numbers that speak<br /><em>for themselves.</em></h2>
+  </div>
+
+  <div class="impact-nums">
+    <div class="impact-item reveal">
+      <div class="impact-num">2,400+</div>
+      <div class="impact-label">Girls directly supported through our programs</div>
+    </div>
+    <div class="impact-item reveal">
+      <div class="impact-num">18</div>
+      <div class="impact-label">Communities and villages we actively work in</div>
+    </div>
+    <div class="impact-item reveal">
+      <div class="impact-num">94%</div>
+      <div class="impact-label">Program participants who remain in school</div>
+    </div>
+    <div class="impact-item reveal">
+      <div class="impact-num">320+</div>
+      <div class="impact-label">Scholarships awarded since founding</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER / JOIN US -->
+<section id="volunteer">
+  <div class="reveal">
+    <div class="section-label">Join Our Mission</div>
+    <h2 class="section-title">Be part of<br /><em>her story.</em></h2>
+    <p class="about-desc">
+      Whether you want to volunteer your time, skills, or resources — there is a role for you here. Together, we can reach more girls, build stronger communities, and create a world where every girl can rise.
+    </p>
+    <p class="about-desc" style="margin-bottom:0;">
+      Fill out the form and one of our team members will be in touch within 48 hours. No experience required — just a willingness to show up.
+    </p>
+  </div>
+
+  <div class="volunteer-form-wrap reveal">
+    <div id="form-container">
+      <div class="form-title">Volunteer / Join Us</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="Priya" />
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Sharma" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label for="role">I'd like to</label>
+        <select id="role">
+          <option value="" disabled selected>Choose an option</option>
+          <option>Volunteer my time</option>
+          <option>Mentor a girl</option>
+          <option>Donate / Fundraise</option>
+          <option>Partner with She Can</option>
+          <option>Intern with the team</option>
+          <option>Just stay connected</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="city">City / Location</label>
+        <input type="text" id="city" placeholder="Delhi, Mumbai, Bangalore…" />
+      </div>
+      <button class="form-submit" id="form-submit">Join the Movement →</button>
+      <div class="form-note">We respect your privacy and will never share your information.</div>
+    </div>
+
+    <div class="form-success" id="form-success">
+      <div class="form-success-icon">🌸</div>
+      <h3>Welcome to She Can!</h3>
+      <p>Thank you for joining our movement. We'll be in touch within 48 hours with next steps.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="stories">
+  <div class="stories-header">
+    <div class="section-label">Voices</div>
+    <h2 class="section-title">Their words,<br /><em>their truth.</em></h2>
+  </div>
+
+  <div class="testimonials-track">
+    <div class="testimonial-card reveal">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">She Can gave me more than a scholarship — they gave me the confidence to believe I belong in every room I walk into.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">AK</div>
+        <div>
+          <div class="author-name">Anika Kapoor</div>
+          <div class="author-role">Program Beneficiary, Class of 2022</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Volunteering here changed how I see the world. These girls have so much fire in them — we just help them find the space to burn brightly.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">RS</div>
+        <div>
+          <div class="author-name">Rohan Sharma</div>
+          <div class="author-role">Volunteer Mentor since 2020</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">I never thought I'd be speaking at my school's leadership day. She Can's mentorship circles made me realize my voice is powerful.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">FI</div>
+        <div>
+          <div class="author-name">Fatima Iqbal</div>
+          <div class="author-role">Student Leader, Community Ambassador</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">She <span>Can</span> Foundation</div>
+      <p class="footer-desc">Empowering girls and young women through education, mentorship, and community — because when she rises, we all rise.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="#" aria-label="Instagram">IG</a>
+        <a class="social-btn" href="#" aria-label="Twitter">TW</a>
+        <a class="social-btn" href="#" aria-label="Facebook">FB</a>
+        <a class="social-btn" href="#" aria-label="LinkedIn">LI</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#impact">Our Impact</a></li>
+        <li><a href="#stories">Stories</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Get Involved</div>
+      <ul class="footer-links">
+        <li><a href="#volunteer">Volunteer</a></li>
+        <li><a href="#volunteer">Mentor a Girl</a></li>
+        <li><a href="#volunteer">Donate</a></li>
+        <li><a href="#volunteer">Corporate Partners</a></li>
+        <li><a href="#volunteer">Internships</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="mailto:hello@sheccan.org">hello@shecan.org</a></li>
+        <li><a href="#">New Delhi, India</a></li>
+        <li><a href="#">Press & Media</a></li>
+        <li><a href="#">Annual Report</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2024 She Can Foundation. Made with <span class="heart">♥</span> for every girl.</span>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Nav scroll effect
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    const spans = hamburger.querySelectorAll('span');
+    if (navLinks.classList.contains('open')) {
+      spans[0].style.transform = 'rotate(45deg) translateY(9px)';
+      spans[1].style.opacity = '0';
+      spans[2].style.transform = 'rotate(-45deg) translateY(-9px)';
+    } else {
+      spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    }
+  });
+
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    });
+  });
+
+  // ── Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = (i % 3) * 0.1 + 's';
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── Form submit
+  const formSubmit = document.getElementById('form-submit');
+  formSubmit.addEventListener('click', () => {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const role = document.getElementById('role').value;
+
+    if (!fname || !email || !role) {
+      formSubmit.style.background = '#c0392b';
+      formSubmit.textContent = 'Please fill all required fields';
+      setTimeout(() => {
+        formSubmit.style.background = '';
+        formSubmit.textContent = 'Join the Movement →';
+      }, 2000);
+      return;
+    }
+
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('form-success').classList.add('show');
+  });
+
+  // ── Count-up animation for impact numbers
+  function countUp(el, target, suffix) {
+    let start = 0;
+    const duration = 1800;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = Math.floor(start).toLocaleString() + suffix;
+      if (start >= target) clearInterval(timer);
+    }, 16);
+  }
+
+  const impactObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const items = entry.target.querySelectorAll('.impact-num');
+        const targets = [[2400, '+'], [18, ''], [94, '%'], [320, '+']];
+        items.forEach((item, i) => {
+          countUp(item, targets[i][0], targets[i][1]);
+        });
+        impactObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const impactSection = document.querySelector('.impact-nums');
+  if (impactSection) impactObserver.observe(impactSection);
+</script>
+</body>
+</html>
